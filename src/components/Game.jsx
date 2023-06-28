@@ -16,9 +16,13 @@ const Game = () => {
 
   return (
     <>
-      {isGameOver ? <h2>Game Over You Lose</h2> : <Canvas />}
+      {isGameOver ? (
+        <h2>Game Over You Lose, word was {activeWord}</h2>
+      ) : (
+        <Canvas />
+      )}
 
-      <p>Current word is {activeWord}</p>
+      {/* <p>Current word is {activeWord}</p> */}
     </>
   );
 };
