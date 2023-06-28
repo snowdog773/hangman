@@ -21,7 +21,6 @@ const Game = () => {
       <Canvas />
 
       <p>Current word is {activeWord}</p>
-      <p>First letter is {gameLetters[0]}</p>
 
       <button onClick={() => dispatch(setWord())}>Change Word</button>
 
