@@ -7,7 +7,7 @@ import Canvas from "./Canvas";
 const Game = () => {
   const dispatch = useDispatch();
   const activeWord = useSelector((state) => state.currentWord.word);
-
+  console.log(activeWord);
   const isGameOver = useSelector((state) => state.guesses.isGameOver);
 
   useEffect(() => {

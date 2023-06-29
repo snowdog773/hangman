@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addGuess,
@@ -12,7 +12,7 @@ const Canvas = () => {
   const correctGuesses = useSelector((state) => state.guesses.correctGuesses);
   const wrongGuesses = useSelector((state) => state.guesses.wrongGuesses);
   const guesses = useSelector((state) => state.guesses.guesses);
-  const isGameOver = useSelector((state) => state.guesses.isGameOver);
+
   const canvasRef = useRef(null);
   // const activeWord = useSelector((state) => state.currentWord.word);
 
@@ -56,7 +56,9 @@ const Canvas = () => {
         ? displayLetters.push(e)
         : displayLetters.push("_");
     });
-    context.fillText(displayLetters.join(""), 20, 50);
+    !displayLetters.includes("_")
+      ? context.fillText("You Win!!!", 20, 50)
+      : context.fillText(displayLetters.join(""), 20, 50);
   }, [gameLetters, correctGuesses]);
 
   return (

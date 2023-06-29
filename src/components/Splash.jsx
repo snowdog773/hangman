@@ -5,9 +5,14 @@ const Splash = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <h1>Hangman</h1>
-      <p>Welcome to hangman</p>
-      <button onClick={() => dispatch(setHasStarted())}>Start Game</button>
+      <h1>Hard Hangman</h1>
+
+      <button
+        className="splash-button"
+        onClick={() => dispatch(setHasStarted())}
+      >
+        Start Game
+      </button>
     </>
   );
 };

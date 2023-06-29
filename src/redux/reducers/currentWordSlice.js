@@ -8,10 +8,17 @@ const initialState = {
 
 export const setWord = createAsyncThunk("currentWord/callAPI", async () => {
   const api = await axios.get(
-    "https://random-word-api.vercel.app/api?words=10"
+    "https://random-word-api.vercel.app/api?words=20"
   );
   const array = api.data;
-  const res = array.sort((a, b) => b.length - a.length);
+  console.log(array);
+  const testArray = ["dropdown", "drop-down"];
+  const hyphenCheck = new RegExp(/-/gm);
+  const filteredArray = array.filter((e) => !hyphenCheck.test(e));
+
+  console.log(filteredArray);
+
+  const res = filteredArray.sort((a, b) => b.length - a.length);
   //resolves array of 10 words, and orders by length
   return res;
 });
@@ -27,8 +34,10 @@ export const currentWordSlice = createSlice(
       });
       builder.addCase(setWord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.word = action.payload[0];
-        state.letters = Array.from(action.payload[0]);
+        if (!state.word) {
+          state.word = action.payload[0];
+          state.letters = Array.from(action.payload[0]);
+        }
       });
       builder.addCase(setWord.rejected, (state, action) => {
         state.isLoading = false;

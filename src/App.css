@@ -7,6 +7,17 @@ body {
   width: 100vw;
 }
 
+h1 {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.splash-button {
+  display: block;
+  margin: 30px auto;
+}
 canvas {
   width: 50vw;
   height: 50vh;
