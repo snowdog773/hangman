@@ -1,5 +1,10 @@
+@font-face {
+  font-family: bloodstain;
+  src: url("./fonts/Bloodstain.ttf");
+}
+
 body {
-  background-color: blue;
+  background-color: #222222;
   color: white;
 }
 
@@ -11,12 +16,50 @@ h1 {
   text-align: center;
   display: block;
   margin: 0 auto;
-  padding: 50px;
+  padding: 40px;
+  font-family: bloodstain;
+  font-size: 30pt;
+  color: rgb(175, 8, 8);
+  text-shadow: 3px 3px 10px #ffffff33;
 }
 
 .splash-button {
+  background-color: #222222;
+  font-family: bloodstain;
+
+  letter-spacing: 5px;
+  border: none;
+  font-size: 20pt;
+  color: whitesmoke;
   display: block;
   margin: 30px auto;
+  transition: 0.5s;
+}
+
+.splash-button:hover {
+  transition: 0.5s;
+  /* letter-spacing: 10px; */
+  text-shadow: 0 10px 4px rgb(243, 215, 215);
+}
+
+@keyframes noose-swing {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+.swinging-noose {
+  display: block;
+  margin: 0 auto;
+  height: 50vh;
+  animation: noose-swing 3s ease-in-out infinite;
+  transform-origin: top;
 }
 canvas {
   width: 50vw;

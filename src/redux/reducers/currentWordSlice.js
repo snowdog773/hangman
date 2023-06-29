@@ -11,50 +11,35 @@ export const setWord = createAsyncThunk("currentWord/callAPI", async () => {
     "https://random-word-api.vercel.app/api?words=20"
   );
   const array = api.data;
-  console.log(array);
-  const testArray = ["dropdown", "drop-down"];
+
   const hyphenCheck = new RegExp(/-/gm);
   const filteredArray = array.filter((e) => !hyphenCheck.test(e));
 
-  console.log(filteredArray);
-
   const res = filteredArray.sort((a, b) => b.length - a.length);
-  //resolves array of 10 words, and orders by length
+  //resolves array of 20 words, and orders by length to return the longest
   return res;
 });
 
-export const currentWordSlice = createSlice(
-  {
-    name: "currentWord",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-      builder.addCase(setWord.pending, (state) => {
-        state.isLoading = true;
-      });
-      builder.addCase(setWord.fulfilled, (state, action) => {
-        state.isLoading = false;
-        if (!state.word) {
-          state.word = action.payload[0];
-          state.letters = Array.from(action.payload[0]);
-        }
-      });
-      builder.addCase(setWord.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
-      });
-    },
-  }
+export const currentWordSlice = createSlice({
+  name: "currentWord",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(setWord.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(setWord.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (!state.word) {
+        state.word = action.payload[0];
+        state.letters = Array.from(action.payload[0]);
+      }
+    });
+    builder.addCase(setWord.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+  },
+});
 
-  // reducers: {
-  //   setWord: (state, action) => {
-  //     state.word = action.payload;
-  //   },
-  // },
-);
-
-// Action creators are generated for each case reducer function
-// export const { setWord } = currentWordSlice.actions;
-
-// export default currentWordSlice.reducer;
 export default currentWordSlice.reducer;

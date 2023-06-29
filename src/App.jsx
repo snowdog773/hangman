@@ -1,4 +1,3 @@
-import React from "react";
 import Game from "./components/Game";
 import Splash from "./components/Splash";
 import "./App.css";
