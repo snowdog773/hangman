@@ -18,38 +18,20 @@ const Canvas = () => {
 
   //
   //
-  //***************EVENT LISTENERS******************************** */
-  useEffect(() => {
-    window.addEventListener("keydown", (event) => {
-      dispatch(addGuess(event.key));
-    });
-    // cleanup this component
-    return () => {
-      window.removeEventListener("keydown", () =>
-        console.log("listeners removed)")
-      );
-    };
-  }, []);
+
   //
   //
   //******************************************************************* */
-
-  useEffect(() => {
-    guesses.forEach((e) => {
-      gameLetters.includes(e)
-        ? dispatch(addCorrectGuess(e))
-        : dispatch(addWrongGuess(e));
-    });
-  }, [guesses]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.fillStyle = "#000000";
-    // context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    context.font = "30px Arial";
+    context.fillStyle = "#ffffff";
+
+    context.font = "20px Arial";
+    context.letterSpacing = "5px";
     const displayLetters = [];
     gameLetters.forEach((e) => {
       correctGuesses.includes(e)
@@ -63,11 +45,7 @@ const Canvas = () => {
 
   return (
     <>
-      <p>Wrong guesses {wrongGuesses.length}</p>
       <canvas ref={canvasRef} />
-      <p>Correct Guesses: {correctGuesses.join()}</p>
-      <p>Wrong Guesses: {wrongGuesses.join()}</p>
-      <p>Guesses: {guesses.join()}</p>
     </>
   );
 };
