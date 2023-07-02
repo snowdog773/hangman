@@ -32,16 +32,13 @@ const Canvas = () => {
 
     context.font = "20px Arial";
     context.letterSpacing = "5px";
-    const displayLetters = [];
-    gameLetters.forEach((e) => {
-      correctGuesses.includes(e)
-        ? displayLetters.push(e)
-        : displayLetters.push("_");
-    });
-    !displayLetters.includes("_")
-      ? context.fillText("You Win!!!", 20, 50)
-      : context.fillText(displayLetters.join(""), 20, 50);
-  }, [gameLetters, correctGuesses]);
+
+    wrongGuesses.length >= 1 && context.fillText("1", 20, 50);
+    wrongGuesses.length >= 2 && context.fillText("1", 30, 50);
+    wrongGuesses.length >= 3 && context.fillText("1", 40, 50);
+    wrongGuesses.length >= 4 && context.fillText("1", 50, 50);
+    wrongGuesses.length >= 5 && context.fillText("1", 60, 50);
+  }, [gameLetters, wrongGuesses]);
 
   return (
     <>

@@ -9,6 +9,7 @@ import {
 const LettersDisplay = () => {
   const dispatch = useDispatch();
   const gameLetters = useSelector((state) => state.currentWord.letters);
+  const hasApiFailed = useSelector((state) => state.currentWord.hasApiFailed);
   const correctGuesses = useSelector((state) => state.guesses.correctGuesses);
   const wrongGuesses = useSelector((state) => state.guesses.wrongGuesses);
   const guesses = useSelector((state) => state.guesses.guesses);
@@ -24,9 +25,15 @@ const LettersDisplay = () => {
   return (
     <>
       <div className="letter-display">
-        {gameLetters.map((e) => {
-          return correctGuesses.includes(e) ? <span>{e}</span> : <span>_</span>;
-        })}
+        {hasApiFailed
+          ? "Server error, check your connection and try again"
+          : gameLetters.map((e) => {
+              return correctGuesses.includes(e) ? (
+                <span>{e}</span>
+              ) : (
+                <span>_</span>
+              );
+            })}
       </div>
     </>
   );

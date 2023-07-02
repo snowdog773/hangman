@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   word: "",
   letters: [],
+  hasApiFailed: false,
 };
 
 export const setWord = createAsyncThunk("currentWord/callAPI", async () => {
@@ -27,17 +28,19 @@ export const currentWordSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(setWord.pending, (state) => {
       state.isLoading = true;
+      state.hasApiFailed = false;
     });
     builder.addCase(setWord.fulfilled, (state, action) => {
       state.isLoading = false;
       if (!state.word) {
         state.word = action.payload[0];
         state.letters = Array.from(action.payload[0]);
+        state.hasApiFailed = false;
       }
     });
-    builder.addCase(setWord.rejected, (state, action) => {
+    builder.addCase(setWord.rejected, (state) => {
       state.isLoading = false;
-      state.error = action.error.message;
+      state.hasApiFailed = true;
     });
   },
 });
