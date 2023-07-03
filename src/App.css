@@ -1,6 +1,11 @@
 @font-face {
   font-family: bloodstain;
-  src: url("./fonts/Bloodstain.woff2");
+  src: url("./fonts/Nosifer-Regular.ttf");
+}
+
+@font-face {
+  font-family: lacquer;
+  src: url("./fonts/Lacquer-Regular.ttf");
 }
 
 body {
@@ -8,6 +13,7 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  font-family: lacquer;
 }
 
 p {
@@ -21,10 +27,10 @@ p {
 
 h1 {
   text-align: center;
-  padding: 10px;
+  padding: 20px;
+  font-size: 25pt;
   margin: 0;
 
-  padding: 40px;
   font-family: bloodstain;
   font-size: 30pt;
   color: rgb(175, 8, 8);
@@ -33,7 +39,7 @@ h1 {
 
 .splash-button {
   background-color: #222222;
-  font-family: bloodstain;
+  font-family: lacquer;
 
   letter-spacing: 5px;
   border: none;
@@ -72,22 +78,35 @@ h1 {
 
 .header {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .header h1 {
   font-family: bloodstain;
-  font-size: 20pt;
+  font-size: 15pt;
   padding: 10px;
   margin: 0;
 }
 
-.header span {
-  font-size: 15pt;
+.empty-div {
+  width: 20%;
+  display: none;
 }
 
+@media (min-width: 800px) {
+  .empty-div {
+    display: block;
+  }
+}
+
+.score-div {
+  width: 40%;
+  font-size: 12pt;
+}
 canvas {
   width: 50vw;
   height: 50vh;
@@ -124,9 +143,17 @@ canvas {
 
 .footer {
   position: absolute;
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
   margin: 0;
-  padding: 0;
+  padding: 5px;
   bottom: 0;
-  border-top: solid 1px white;
+  /* border-top: solid 1px white; */
   width: 100vw;
+  font-size: 10pt;
+}
+
+.footer a {
+  color: white;
 }
