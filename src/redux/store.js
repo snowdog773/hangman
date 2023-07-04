@@ -3,6 +3,7 @@ import currentWordReducer from "./reducers/currentWordSlice";
 
 import gameStartedReducer from "./reducers/gameStartedSlice";
 import guessesReducer from "./reducers/guessesSlice";
+import scoreReducer from "./reducers/scoreSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
 
     hasStarted: gameStartedReducer,
     guesses: guessesReducer,
+    score: scoreReducer,
   },
 });

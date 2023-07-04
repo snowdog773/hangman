@@ -4,7 +4,7 @@ import { alphabet } from "../../utils/constants";
 const initialState = {
   guesses: [],
   correctGuesses: [],
-  wrongGuesses: [],
+  wrongGuesses: 0,
   isGameOver: false,
   displayLetters: [],
 };
@@ -22,15 +22,10 @@ export const guessesSlice = createSlice({
         state.guesses.push(input);
     },
     addCorrectGuess: (state, action) => {
-      !state.correctGuesses.includes(action.payload) &&
-        state.correctGuesses.push(action.payload);
+      state.correctGuesses.push(action.payload);
     },
-    addWrongGuess: (state, action) => {
-      !state.wrongGuesses.includes(action.payload) &&
-        state.wrongGuesses.push(action.payload);
-      if (state.wrongGuesses.length >= 5) {
-        state.isGameOver = true;
-      }
+    wrongGuessCount: (state) => {
+      state.wrongGuesses += 1;
     },
     updateDisplayLetters: (state, action) => {
       state.displayLetters = action.payload;
@@ -42,7 +37,7 @@ export const guessesSlice = createSlice({
 export const {
   addGuess,
   addCorrectGuess,
-  addWrongGuess,
+  wrongGuessCount,
   updateDisplayLetters,
 } = guessesSlice.actions;
 
