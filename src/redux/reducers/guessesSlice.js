@@ -5,7 +5,6 @@ const initialState = {
   guesses: [],
   correctGuesses: [],
   wrongGuesses: 0,
-  isGameOver: false,
   displayLetters: [],
 };
 
@@ -27,18 +26,17 @@ export const guessesSlice = createSlice({
     wrongGuessCount: (state) => {
       state.wrongGuesses += 1;
     },
-    updateDisplayLetters: (state, action) => {
-      state.displayLetters = action.payload;
+
+    resetGuesses: (state) => {
+      state.guesses = [];
+      state.correctGuesses = [];
+      state.wrongGuesses = 0;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  addGuess,
-  addCorrectGuess,
-  wrongGuessCount,
-  updateDisplayLetters,
-} = guessesSlice.actions;
+export const { addGuess, addCorrectGuess, wrongGuessCount, resetGuesses } =
+  guessesSlice.actions;
 
 export default guessesSlice.reducer;

@@ -103,13 +103,17 @@ h1 {
   }
 }
 
+.score-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 .score-div {
-  width: 40%;
   font-size: 12pt;
 }
 canvas {
-  width: 50vw;
-  height: 50vh;
+  width: 250px;
   display: block;
   margin: 0 auto;
   border: 1px solid white;
@@ -127,6 +131,7 @@ canvas {
   margin: 20px auto;
   justify-content: center;
   width: 80vw;
+  max-width: 300px;
   flex-wrap: wrap;
 }
 
@@ -156,4 +161,23 @@ canvas {
 
 .footer a {
   color: white;
+}
+
+.round-won,
+.game-lost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0009;
+  color: white;
+  text-align: center;
+}
+
+.round-won h2,
+.game-lost h2 {
+  margin: 0;
+  padding: 20px;
 }

@@ -7,33 +7,39 @@ import {
   addGuess,
   wrongGuessCount,
 } from "../redux/reducers/guessesSlice";
-import { addToScore, zeroScore } from "../redux/reducers/scoreSlice";
+import { addToScore } from "../redux/reducers/scoreSlice";
+import { setRoundWon, setGameLost } from "../redux/reducers/gameStartedSlice";
 import Header from "./Header";
 import Footer from "./Footer";
 import Canvas from "./Canvas";
 import LettersDisplay from "./LettersDisplay";
 import Keyboard from "./Keyboard";
+import RoundWon from "./RoundWon";
+import GameLost from "./GameLost";
 
 const Game = () => {
   const dispatch = useDispatch();
   const letters = useSelector((state) => state.currentWord.letters);
   const guesses = useSelector((state) => state.guesses.guesses);
-  const isGameOver = useSelector((state) => state.guesses.isGameOver);
-  const correctGuesses = useSelector((state) => state.guesses.correctGuesses);
   const wrongGuesses = useSelector((state) => state.guesses.wrongGuesses);
+  const isRoundWon = useSelector((state) => state.hasStarted.isRoundWon);
+  const isGameLost = useSelector((state) => state.hasStarted.isGameLost);
 
   //***************EVENT LISTENERS******************************** */
+
   useEffect(() => {
-    window.addEventListener("keydown", (event) => {
-      dispatch(addGuess(event.key));
-    });
+    console.log("games listeners started");
+    const listener = (event) => dispatch(addGuess(event.key));
+    window.addEventListener("keydown", listener);
+
+    (isRoundWon || isGameLost) &&
+      window.removeEventListener("keydown", listener); //locks out keys when not in play
+    console.log("listeners removed");
     // cleanup this component
     return () => {
-      window.removeEventListener("keydown", () =>
-        console.log("listeners removed)")
-      );
+      window.removeEventListener("keydown", listener);
     };
-  }, []);
+  }, [isRoundWon, isGameLost]);
 
   //************INITIAL API CALL***************************** */
   useEffect(() => {
@@ -43,19 +49,18 @@ const Game = () => {
   //*******************GAME LOGIC******************************* */
 
   useEffect(() => {
-    console.log(wrongGuesses);
     // checks if last guess is one of the letters
     if (letters.includes(guesses[guesses.length - 1])) {
       dispatch(addCorrectGuess(guesses[guesses.length - 1]));
-      dispatch(addToScore(50));
+      dispatch(addToScore(100)); // change score per correct guess here
       // checks win condition
       if (letters.every((e) => guesses.includes(e))) {
-        console.log("game won");
+        dispatch(setRoundWon(true));
       }
     } else {
       if (guesses.length > 0) {
-        wrongGuesses >= 5
-          ? console.log("game over loser")
+        wrongGuesses >= 4
+          ? dispatch(setGameLost(true))
           : dispatch(wrongGuessCount());
       }
     }
@@ -68,6 +73,9 @@ const Game = () => {
       <LettersDisplay />
       <Keyboard />
       <Footer />
+
+      {isRoundWon && <RoundWon />}
+      {isGameLost && <GameLost />}
 
       {/* <p>Current word is {activeWord}</p> */}
     </>

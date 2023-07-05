@@ -32,11 +32,10 @@ export const currentWordSlice = createSlice({
     });
     builder.addCase(setWord.fulfilled, (state, action) => {
       state.isLoading = false;
-      if (!state.word) {
-        state.word = action.payload[0];
-        state.letters = Array.from(action.payload[0]);
-        state.hasApiFailed = false;
-      }
+
+      state.word = action.payload[0];
+      state.letters = Array.from(action.payload[0]);
+      state.hasApiFailed = false;
     });
     builder.addCase(setWord.rejected, (state) => {
       state.isLoading = false;
