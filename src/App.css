@@ -106,6 +106,7 @@ h1 {
 .score-wrapper {
   display: flex;
   width: 100%;
+  max-width: 400px;
   flex-direction: row;
   justify-content: space-evenly;
 }
@@ -113,10 +114,12 @@ h1 {
   font-size: 12pt;
 }
 canvas {
-  width: 250px;
+  width: 300px;
   display: block;
   margin: 0 auto;
   border: 1px solid white;
+  border-radius: 15px;
+  background-color: #000000;
 }
 
 .letter-display {
@@ -144,10 +147,11 @@ canvas {
 .strikeout {
   position: absolute;
   top: 0;
+  color: rgb(177, 14, 14);
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   background-color: #222222;
   display: flex;
   justify-content: center;
@@ -171,13 +175,44 @@ canvas {
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  background-color: #0009;
+  background-color: #000;
+  opacity: 90%;
   color: white;
   text-align: center;
 }
 
-.round-won h2,
-.game-lost h2 {
-  margin: 0;
+.popup-wrapper {
+  background-color: #000;
+  opacity: 100%;
+  width: 80%;
+  margin: 100px auto;
+
+  /* border-radius: 20px; */
+  /* border: 1px solid white; */
+}
+
+.popup-wrapper h2 {
+  margin: 30px 0 0;
+
   padding: 20px;
+}
+
+.popup-wrapper ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.popup-wrapper li {
+  margin: 5px 0;
+}
+
+.popup-wrapper button {
+  margin: 30px;
+  background: white;
+  color: black;
+  font-family: lacquer;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
 }

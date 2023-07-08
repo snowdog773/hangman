@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   incrementRoundsWon,
@@ -21,18 +22,26 @@ const RoundWon = () => {
     dispatch(addToScore(totalBonus));
   };
 
+  // delayed render code
+  const [delayRender, setDelay] = useState(false);
+  setTimeout(() => setDelay(true), 2000);
+
   return (
     <>
-      <div className="round-won">
-        <h2>Round Won</h2>
-        <h3>Bonus</h3>
-        <ul>
-          <li>Round Bonus : 1000</li>
-          <li>Guesses Left : {guessesLeft} X 500</li>
-          <li>Total : {totalBonus}</li>
-        </ul>
-        <button onClick={() => nextRound()}>Continue</button>
-      </div>
+      {delayRender && (
+        <div className="round-won">
+          <div className="popup-wrapper">
+            <h2>Round Won</h2>
+            <h3>Bonus</h3>
+            <ul>
+              <li>Round Bonus : 1000</li>
+              <li>Guesses Left : {guessesLeft} X 500</li>
+              <li>Total : {totalBonus}</li>
+            </ul>
+            <button onClick={() => nextRound()}>Continue</button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

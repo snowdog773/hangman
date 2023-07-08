@@ -59,8 +59,9 @@ const Game = () => {
       }
     } else {
       if (guesses.length > 0) {
-        wrongGuesses >= 4
-          ? dispatch(setGameLost(true))
+        console.log(wrongGuesses, "game component");
+        wrongGuesses >= 5 //value of wrongGuesses is stale here, runs 1 behind state
+          ? console.log("holder")
           : dispatch(wrongGuessCount());
       }
     }
