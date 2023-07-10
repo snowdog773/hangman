@@ -216,3 +216,60 @@ canvas {
   border-radius: 8px;
   padding: 5px 10px;
 }
+.splash-body {
+  position: relative;
+  text-align: center;
+}
+.scores {
+  position: absolute;
+  top: 0;
+  display: block;
+  background-color: #22222299;
+  width: 100vw;
+  height: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.scores h2 {
+  margin: 0;
+  padding: 0 0 20px;
+}
+.score-list-wrapper {
+  overflow: hidden;
+}
+.score-list-wrapper ul {
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  width: 50vw;
+  height: 40vh;
+
+  animation: score-scroll 5s;
+  animation: score-scroll 5s 5s infinite;
+  /* control width of high scores here */
+}
+
+.fade-block {
+  width: 100vw;
+  height: 20px;
+  background-color: #22222299;
+}
+
+.scores li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+  padding: none;
+}
+
+@keyframes score-scroll {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -50px;
+  }
+}

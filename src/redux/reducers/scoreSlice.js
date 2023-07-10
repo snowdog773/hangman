@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   score: 0,
+  highScores: [],
 };
 
 export const scoreSlice = createSlice({
@@ -14,10 +15,13 @@ export const scoreSlice = createSlice({
     zeroScore: (state) => {
       state.score = 0;
     },
+    setHighScores: (state, action) => {
+      state.highScores = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToScore, zeroScore } = scoreSlice.actions;
+export const { addToScore, zeroScore, setHighScores } = scoreSlice.actions;
 
 export default scoreSlice.reducer;

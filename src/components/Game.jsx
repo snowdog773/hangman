@@ -16,6 +16,7 @@ import LettersDisplay from "./LettersDisplay";
 import Keyboard from "./Keyboard";
 import RoundWon from "./RoundWon";
 import GameLost from "./GameLost";
+import HighScores from "./HighScores";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -77,8 +78,6 @@ const Game = () => {
 
       {isRoundWon && <RoundWon />}
       {isGameLost && <GameLost />}
-
-      {/* <p>Current word is {activeWord}</p> */}
     </>
   );
 };
