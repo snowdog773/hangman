@@ -17,6 +17,8 @@ import Keyboard from "./Keyboard";
 import RoundWon from "./RoundWon";
 import GameLost from "./GameLost";
 import HighScores from "./HighScores";
+import audioHammer from "../assets/hammer.mp3";
+import audioChoke from "../assets/choke.mp3";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -61,9 +63,14 @@ const Game = () => {
     } else {
       if (guesses.length > 0) {
         console.log(wrongGuesses, "game component");
-        wrongGuesses >= 5 //value of wrongGuesses is stale here, runs 1 behind state
-          ? console.log("holder")
-          : dispatch(wrongGuessCount());
+        if (wrongGuesses >= 4) {
+          //value of wrongGuesses is stale here, runs 1 behind state
+          dispatch(wrongGuessCount());
+          new Audio(audioChoke).play();
+        } else {
+          dispatch(wrongGuessCount());
+          new Audio(audioHammer).play();
+        }
       }
     }
   }, [guesses]);

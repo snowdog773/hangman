@@ -244,9 +244,10 @@ canvas {
   margin: 0 auto;
   width: 50vw;
   height: 40vh;
+  max-width: 400px;
 
-  animation: score-scroll 5s;
-  animation: score-scroll 5s 5s infinite;
+  /* animation: score-scroll 5s; */
+  animation: score-scroll 10s 3s infinite ease-in-out;
   /* control width of high scores here */
 }
 
@@ -266,10 +267,13 @@ canvas {
 
 @keyframes score-scroll {
   0% {
-    top: 0;
+    top: 0px;
   }
 
+  50% {
+    top: -170px;
+  }
   100% {
-    top: -50px;
+    top: 0px;
   }
 }
