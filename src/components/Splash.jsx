@@ -16,7 +16,9 @@ const Splash = () => {
   }, []);
   return (
     <>
-      <h1>HARD HANGMAN</h1>
+      <div className="h1-wrapper">
+        <h1>HARD HANGMAN</h1>
+      </div>
       <div className="splash-body">
         <img className="swinging-noose" src={noose} />
 

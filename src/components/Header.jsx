@@ -7,7 +7,9 @@ const Header = () => {
     <>
       <div className="header">
         <div className="empty-div"></div>
-        <h1>HARD HANGMAN</h1>
+        <div className="h1-wrapper">
+          <h1>HARD HANGMAN</h1>
+        </div>
         <div className="score-wrapper">
           <div className="rounds-div">Round : {round}</div>
           <div className="score-div">Score : {score}</div>

@@ -13,7 +13,7 @@ const GameLost = () => {
   const score = useSelector((state) => state.score.score);
   const highScores = useSelector((state) => state.score.highScores);
   const [showRestart, setShowRestart] = useState(false);
-
+  const [errorMessage, setShowErrorMessage] = useState(false);
   const [scoreName, setScoreName] = useState("");
   const restart = () => {
     dispatch(resetGuesses());
@@ -26,7 +26,7 @@ const GameLost = () => {
   useEffect(() => {
     //checks score against high score and returns position index
     const index = highScores.findIndex((e) => e.score < score);
-    console.log("game lost effect ran", highScores);
+
     if (index === -1) {
       setShowRestart(true);
     } else {
@@ -37,13 +37,17 @@ const GameLost = () => {
   }, []);
 
   const enterHighScore = async () => {
-    await axios.post("http://scoreboard-server.pitans.co.uk/addNewScore", {
-      name: scoreName,
-      score,
-    });
-    localStorage.setItem("name", scoreName);
-    console.log(scoreName);
-    setShowRestart(true);
+    if (scoreName) {
+      await axios.post("http://scoreboard-server.pitans.co.uk/addNewScore", {
+        name: scoreName,
+        score,
+      });
+      localStorage.setItem("name", scoreName);
+      setShowErrorMessage(false);
+      setShowRestart(true);
+    } else {
+      setShowErrorMessage(true);
+    }
   };
 
   return (
@@ -65,6 +69,9 @@ const GameLost = () => {
               ></input>
               <button onClick={() => enterHighScore()}>Submit</button>
             </div>
+          )}
+          {errorMessage && (
+            <p className="error">Did you forget your name, Brainiac?</p>
           )}
         </div>
       </div>

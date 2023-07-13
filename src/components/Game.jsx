@@ -35,14 +35,14 @@ const Game = () => {
     const listener = (event) => dispatch(addGuess(event.key));
     window.addEventListener("keydown", listener);
 
-    (isRoundWon || isGameLost) &&
+    (isRoundWon || isGameLost || !letters[0]) &&
       window.removeEventListener("keydown", listener); //locks out keys when not in play
     console.log("listeners removed");
     // cleanup this component
     return () => {
       window.removeEventListener("keydown", listener);
     };
-  }, [isRoundWon, isGameLost]);
+  }, [isRoundWon, isGameLost, letters]);
 
   //************INITIAL API CALL***************************** */
   useEffect(() => {
@@ -80,7 +80,7 @@ const Game = () => {
 
       <Canvas />
       <LettersDisplay />
-      <Keyboard />
+      {letters[0] && <Keyboard />}
       <Footer />
 
       {isRoundWon && <RoundWon />}
