@@ -31,13 +31,12 @@ const Game = () => {
   //***************EVENT LISTENERS******************************** */
 
   useEffect(() => {
-    console.log("games listeners started");
     const listener = (event) => dispatch(addGuess(event.key));
     window.addEventListener("keydown", listener);
 
     (isRoundWon || isGameLost || !letters[0]) &&
       window.removeEventListener("keydown", listener); //locks out keys when not in play
-    console.log("listeners removed");
+
     // cleanup this component
     return () => {
       window.removeEventListener("keydown", listener);
@@ -62,7 +61,6 @@ const Game = () => {
       }
     } else {
       if (guesses.length > 0) {
-        console.log(wrongGuesses, "game component");
         if (wrongGuesses >= 4) {
           //value of wrongGuesses is stale here, runs 1 behind state
           dispatch(wrongGuessCount());

@@ -10,7 +10,7 @@ const HighScores = () => {
   useEffect(() => {
     const asyncFunc = async () => {
       const result = await axios.get(
-        "http://scoreboard-server.pitans.co.uk/getScores"
+        "https://scoreboard-server.pitans.co.uk/getScores"
       );
 
       if (result.data.length < 20) {
@@ -18,7 +18,7 @@ const HighScores = () => {
         let extras = new Array(20 - result.data.length).fill(item);
 
         const newArray = result.data.concat(extras);
-        console.log(newArray);
+
         dispatch(setHighScores(newArray));
       } else {
         dispatch(setHighScores(result.data));

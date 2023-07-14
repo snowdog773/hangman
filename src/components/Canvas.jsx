@@ -15,7 +15,7 @@ const Canvas = () => {
     c.strokeStyle = "#ffffff";
 
     c.clearRect(0, 0, 300, 300);
-    console.log(wrongGuesses);
+
     c.beginPath();
     c.lineWidth = "2";
     //ground
@@ -89,7 +89,6 @@ const Canvas = () => {
       box.x += 1;
     }
     if (wrongGuesses >= 5) {
-      console.log("end game animation triggered");
       // box.draw(200, 175);
       window.requestAnimationFrame(animateBox);
       setTimeout(() => dispatch(setGameLost(true)), 2000);

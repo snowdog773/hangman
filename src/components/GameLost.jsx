@@ -38,7 +38,7 @@ const GameLost = () => {
 
   const enterHighScore = async () => {
     if (scoreName) {
-      await axios.post("http://scoreboard-server.pitans.co.uk/addNewScore", {
+      await axios.post("https://scoreboard-server.pitans.co.uk/addNewScore", {
         name: scoreName,
         score,
       });
