@@ -1,0 +1,28 @@
+name: Remote Deploy
+on:
+  push:
+    branches: [main] # This triggers the magic every time you push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            # 1. Move into your newly organized project folder
+            cd ~/apps/hard-hangman
+
+            # 2. Pull the latest code from GitHub
+            git pull origin main
+
+            # 3. Tell the "Chef" (Docker Compose) to rebuild the "Cake" (Container)
+            # The --build flag ensures it picks up your new React changes
+            docker compose up -d --build
+
+            # 4. Clean up old, unused "scraps" (images) to save disk space
+            docker image prune -f
