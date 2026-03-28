@@ -14,15 +14,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            # 1. Move into your newly organized project folder
+            # 1. Create the folder if it doesn't exist
+            mkdir -p ~/apps/hard-hangman
             cd ~/apps/hard-hangman
 
-            # 2. Pull the latest code from GitHub
+            # 2. Check if it's a git repo; if not, clone it
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/${{ github.repository }}.git .
+            fi
+
+            # 3. Pull latest and rebuild
             git pull origin main
-
-            # 3. Tell the "Chef" (Docker Compose) to rebuild the "Cake" (Container)
-            # The --build flag ensures it picks up your new React changes
             docker compose up -d --build
-
-            # 4. Clean up old, unused "scraps" (images) to save disk space
             docker image prune -f
