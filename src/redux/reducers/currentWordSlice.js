@@ -9,7 +9,7 @@ const initialState = {
 
 export const setWord = createAsyncThunk("currentWord/callAPI", async () => {
   const api = await axios.get(
-    "https://random-word-api.vercel.app/api?words=20"
+    "https://random-word-api.herokuapp.com/word?number=20",
   );
   const array = api.data;
 
